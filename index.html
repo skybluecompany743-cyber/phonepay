@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Check</title>
+    <style>
+        body {
+            background-color: black;
+            color: #0f0; /* Green text */
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            overflow: hidden; /* Hide scrollbars */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        #main-text {
+            font-size: 20px;
+            line-height: 1.5;
+            max-width: 80%;
+        }
+        #final-message {
+            display: none; /* Hidden initially */
+            color: red;
+            font-size: 50px;
+            font-weight: bold;
+            animation: blink 0.5s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-text"></div>
+    <div id="final-message">പറ്റിച്ചേ! 😂</div>
+
+    <script>
+        const textElement = document.getElementById('main-text');
+        const finalMessage = document.getElementById('final-message');
+        
+        // 1. ആദ്യത്തെ 10 സെക്കൻഡ് കാണിക്കാനുള്ള ടെക്സ്റ്റ് (ഹാക്കിങ് പോലെ)
+        const hackingText = "System initializing...<br>Connecting to secured server...<br>Accessing user database...<br>Verifying credentials...<br>WARNING: Security breach detected!<br>Attempting to isolate threat...<br>Downloading financial records...<br>Encrypting sensitive data...<br>Finalizing process...<br>";
+        
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < hackingText.length) {
+                // HTML ടാഗുകൾ (<br>) ശരിയായി പ്രവർത്തിക്കാൻ
+                if (hackingText.substring(index, index + 4) === '<br>') {
+                    textElement.innerHTML += '<br>';
+                    index += 4;
+                } else {
+                    textElement.innerHTML += hackingText.charAt(index);
+                    index++;
+                }
+                setTimeout(typeWriter, 50); // ഓരോ അക്ഷരവും വരാൻ എടുക്കുന്ന സമയം (50ms)
+            } else {
+                // 10 സെക്കൻഡിന് ശേഷം ബാങ്ക് മെസ്സേജ് കാണിക്കാൻ
+                setTimeout(showBankLock, 2000); // ഹാക്കിങ് കഴിഞ്ഞു 2 സെക്കൻഡ് വെയിറ്റ് ചെയ്യും
+            }
+        }
+
+        function showBankLock() {
+            textElement.innerHTML = ""; // ഹാക്കിങ് ടെക്സ്റ്റ് മായ്ക്കുക
+            textElement.style.color = "yellow"; // ബാങ്ക് മെസ്സേജ് മഞ്ഞ നിറത്തിൽ
+            textElement.style.fontSize = "30px";
+            textElement.innerHTML = "ALERT!<br>Your Bank A/C is temporarily LOCKED due to suspicious activity.<br>Please contact nearest branch immediately.";
+            
+            // ബാങ്ക് മെസ്സേജ് കാണിച്ച് 5 സെക്കൻഡിന് ശേഷം 'പറ്റിച്ചേ' കാണിക്കുക
+            setTimeout(showFinalPrank, 5000); 
+        }
+
+        function showFinalPrank() {
+            textElement.style.display = "none"; // ബാങ്ക് മെസ്സേജ് മറയ്ക്കുക
+            finalMessage.style.display = "block"; // 'പറ്റിച്ചേ' കാണിക്കുക
+        }
+
+        // പേജ് ലോഡ് ആകുമ്പോൾ തമാശ തുടങ്ങുക
+        window.onload = typeWriter;
+
+    </script>
+
+</body>
+</html>
